@@ -22,6 +22,10 @@ public class Runigram {
 		
 		//// Write here whatever code you need in order to test your work.
 		//// You can continue using the image array.
+		/// // Tests the horizontal flipping of an image:
+		image = flippedVertically(tinypic);
+		System.out.println();
+		print(image);
 	}
 
 	/** Returns a 2D array of Color values, representing the image data
@@ -89,8 +93,16 @@ public class Runigram {
 	 * Returns an image which is the vertically flipped version of the given image. 
 	 */
 	public static Color[][] flippedVertically(Color[][] image){
-		//// Replace the following statement with your code
-		return null;
+		Color[][] flippedVertically = new Color[image.length][image[0].length];
+			int index = 0;
+		for (int i = image.length - 1; i >= 0; i--) {
+			for (int j = 0; j < image[0].length; j++) {
+				flippedVertically[i][j] = image[index][j];
+			}
+			index++;
+		}
+
+		return flippedVertically;
 	}
 	
 	// Computes the luminance of the RGB values of the given pixel, using the formula 

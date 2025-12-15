@@ -175,14 +175,22 @@ public class Runigram {
 	 * The two images must have the same dimensions.
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
-		Color[][] blendImages = new Color[image1.length][image1[0].length];
-		for (int i = 0; i < blendImages.length; i++) {
-			for (int j = 0; j < blendImages[0].length; j++) {
-				blendImages[i][j] = blend(image1[i][j], image2[i][j], alpha);
-			}
-		}
-		return blendImages;
+    if (alpha == 0) {
+        return image2;
+    }
+    if (alpha == 1) {
+        return image1;
+    }
+
+    Color[][] blendImages = new Color[image1.length][image1[0].length];
+    	for (int i = 0; i < blendImages.length; i++) {
+        	for (int j = 0; j < blendImages[0].length; j++) {
+            	blendImages[i][j] = blend(image1[i][j], image2[i][j], alpha);
+        	}
+    	}
+    	return blendImages;
 	}
+
 
 	/**
 	 * Morphs the source image into the target image, gradually, in n steps.

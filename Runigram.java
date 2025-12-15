@@ -91,35 +91,38 @@ public class Runigram {
 	 * Returns an image which is the horizontally flipped version of the given image. 
 	 */
 	public static Color[][] flippedHorizontally(Color[][] image) {
-    Color[][] result = new Color[image.length][image[0].length];
-    for (int i = 0; i < image.length; i++) {
-        for (int j = 0; j < image[0].length; j++) {
-            result[i][image[0].length - 1 - j] = image[i][j];
-        }
-    }
-    return result;
-}
+		Color[][] flippedHorizontally = new Color[image.length][image[0].length];
+		for (int i = 0; i < image.length; i++) {
+			int index = 0;
+			for (int j = image[0].length - 1; j >= 0 ; j--) {
+				flippedHorizontally[i][j] = image[i][index];
+				index++;
+			}
+		} 
+		return flippedHorizontally;
+	}
 	
 	/**
 	 * Returns an image which is the vertically flipped version of the given image. 
 	 */
-	public static Color[][] flippedVertically(Color[][] image) {
-    Color[][] result = new Color[image.length][image[0].length];
-    for (int i = 0; i < image.length; i++) {
-        for (int j = 0; j < image[0].length; j++) {
-            result[image.length - 1 - i][j] = image[i][j];
-        }
-    }
-    return result;
-}
+	public static Color[][] flippedVertically(Color[][] image){
+		Color[][] flippedVertically = new Color[image.length][image[0].length];
+			int index = 0;
+		for (int i = image.length - 1; i >= 0; i--) {
+			for (int j = 0; j < image[0].length; j++) {
+				flippedVertically[i][j] = image[index][j];
+			}
+			index++;
+		}
+
+		return flippedVertically;
+	}
 	
 	// Computes the luminance of the RGB values of the given pixel, using the formula 
 	// lum = 0.299 * r + 0.587 * g + 0.114 * b, and returns a Color object consisting
 	// the three values r = lum, g = lum, b = lum.
 	private static Color luminance(Color pixel) {
-		int lum = (int) Math.round(0.299 * pixel.getRed() + 0.587 * pixel.getGreen() + 0.114 * pixel.getBlue()
-);
-
+		int lum = (int)(0.299 * pixel.getRed() + 0.587 * pixel.getGreen() + 0.114 * pixel.getBlue());
 		Color greyed = new Color (lum, lum, lum);
 		return greyed; 
 	}
@@ -145,9 +148,7 @@ public class Runigram {
 		Color[][] scaled = new Color[height][width];
 		for (int i = 0; i < scaled.length; i++) {
 			for (int j = 0; j < scaled[0].length; j++) {
-				int srcRow = Math.min(image.length - 1, (int)(i * image.length / (double) height));
-				int srcCol = Math.min(image[0].length - 1, (int)(j * image[0].length / (double) width));
-				scaled[i][j] = image[srcRow][srcCol];
+				scaled[i][j] = image[(int) (i * image.length / (double) height)][(int) (j * image[0].length / (double) width)];
 			}
 		}
 		return scaled;
